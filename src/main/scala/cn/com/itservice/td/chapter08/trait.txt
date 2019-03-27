@@ -1,0 +1,34 @@
+1)可以把特质作为接口来使用。就像普通接口那样，声明那些希望其他类继承实现的方法：
+    trait BaseSoundPlayer{
+        def play;   //方法不需要参数
+        def close
+        def pause;
+        def stop
+        def resume
+    }
+
+    trait Dog{
+        def speak(whatToSay:String) //方法需要参数
+        def wagTail(enabled:Boolean)
+    }
+
+2)当一个类需要继承特质时，要使用extends和with关键字。只继承一个特质时，使用extends
+    class Mp3SoundPlayer extends BaseSoundPlayer{...} //继承一个特质  extends
+    class Foo extends BaseClass with trait1 with trait2{...} //继承多个特质  extends with
+
+3)除非实现特质的类是一个抽象类，否则它必须实现特质所有的抽象方法
+  如果一个类继承了一个特质但是没有实现它的抽象方法，这个类必须被声明为抽象类
+
+
+4)类遵循如下规则通过extends或者with关键字继承特质
+  1.如果一个类继承一个特质，使用extends
+  2.如果一个类继承多个特质，第一个特质使用extends,其余的特质使用with
+  3.如果一个类继承了一个类(或者抽象类)和一个特质，继承类(或者抽象类)使用extends,继承特质使用with
+
+
+
+5)通过继承来限制特质的使用范围
+问题：限定一个特质仅可以被哪些继承了某个类或者继承了某个特质的类使用
+通过下面的语法，定义一个名为TraitName的特质，此TraitName只可以被混入到继承了SuperThing的类中，
+这个SuperThing可以是特质、类或者抽象类
+    trait TraitName extends SuperThing
